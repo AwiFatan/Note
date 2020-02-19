@@ -1,0 +1,158 @@
+<b:if cond='data:blog.metaDescription'>
+  <meta expr:content='data:blog.metaDescription' name='og:description'/>
+</b:if>
+<b:if cond='data:blog.metaDescription != &quot;&quot;'>
+<meta expr:content='data:post.snippet' property='og:description'/>
+<meta expr:content='data:blog.snippet' name='twitter:description'/>
+<meta expr:content='data:blog.metaDescription' itemprop='description'/>
+<meta expr:content='data:blog.metaDescription' name='description'/> 
+
+<div class='resumo'>
+  <span><data:post.snippet/>
+ </span>
+</div>
+<a class='read-more' expr:href='data:post.url'>Read More</a>
+==========
+<b:if cond='data:blog.metaDescription != &quot;&quot;'>
+   <meta expr:content='data:blog.metaDescription' name='og:description'/>
+<b:else/>
+   <meta expr:content='data:post.snippet' property='og:description'/>
+</b:if>
+<meta expr:content='data:post.thumbnailUrl' itemprop='image_url'/>
+
+
+Archive page
+<b:if cond='data:blog.pageType == "archive"'>
+<!--archive_Page-->
+</b:if>
+Error Page (404)
+<b:if cond='data:blog.pageType == "error_page"'>
+<!-- all error pages-->
+</b:if>
+Index Page
+<b:if cond='data:blog.pageType == "index"'>
+<!-- all index pages -->
+
+
+expr:class='data:post.id + "article"'
+expr:id='data:post.id'
+expr:href='data:post.url'
+expr:src='data:post.thumbnailUrl'
+
+data:blog.Type
+<data:post.body/>
+data:post.title
+data:post.url
+data:post.jumpText
+data:post.body
+data:post.hasJumpLink
+
+data:blog.title
+data: description
+
+
+data:view.featuredImage
+data:view.isSearch
+data:view.isLabelSearch
+data:view.search.query
+
+data:blog.pageType
+data:post.snippet
+data:posts
+data:post.isFirstPost
+data:post.isDateStart
+data:view.featuredImage
+data:post.firstImageUrl
+data:post.thumbnailUrl
+data:post.sharePostUrl
+data:post.snippet
+data:blog.postImageUrl
+data:post.thumbnailUrl
+
+data:post.snippets.long
+data:post.snippets.short
+
+data:blog.metaDescription
+</b:if>
+Homepage
+<b:if cond='data:blog.url == data:blog.homepageUrl'> 
+<!-- only homepage -->
+</b:if>
+Item (post) pages
+<b:if cond='data:blog.pageType == "item"'>
+<!-- all item pages -->
+</b:if>
+Specific Post by URL
+<b:if cond='data:blog.url == data:blog.canonicalHomepageUrl + "2014/08/foo.html"'> 
+<!-- a item page from august 2014 with post-title 'foo'-->
+</b:if>
+Label page
+<b:if cond='data:blog.searchLabel'>
+<!-- all label pages -->
+</b:if>
+Specific Label Page
+<b:if cond='data:blog.searchLabel == "foo"'>
+<!-- for label 'foo' -->
+</b:if>
+Search page
+<b:if cond='data:blog.searchQuery'>
+<!-- all search pages -->
+</b:if>
+Specific Search Query page
+<b:if cond='data:blog.searchQuery == "foo"'>
+<!-- for query 'foo' -->
+</b:if>
+Static page
+<b:if cond='data:blog.pageType == "static_page"'>
+<!-- all static pages -->
+</b:if>
+Specific Static page by URL
+<b:if cond='data:blog.url == data:blog.canonicalHomepageUrl + "p/foo.html"'> 
+<!-- a specific static page with name 'foo' -->
+</b:if>
+AND/OR/NOT
+AND
+
+<b:if cond='data:blog.pageType == "index"'>
+  <b:if cond='data:blog.searchQuery'>
+    <!--search_page AND index_page-->
+  </b:if>
+</b:if>
+OR
+
+<b:if cond='data:blog.url == data:blog.canonicalHomepageUrl + "p/foo.html"'> 
+  <!-- static_site foo OR static_site bar -->
+      <b:else/>
+<b:if cond='data:blog.url == data:blog.canonicalHomepageUrl + "p/bar.htm"'> 
+  <!-- static_site foo OR static_site bar -->
+   </b:if>
+</b:if>
+NOT
+
+<b:if cond='data:blog.pageType != "item"'>
+  <!-- all pages except item pages -->
+</b:if>
+
+<b:if cond='data:blog.url != data:blog.homepageUrl'> 
+  <!-- all pages but NOT homepage -->
+</b:if>
+How to Use conditional tags
+To apply a conditional tag to some content, simply put the content inside the opening <b:if cond…> and the closing </b:if> like:
+
+<b:if cond='data:blog.pageType == "item"'>
+    # THIS CONTENT WILL BE EXECUTED IF CONDITION IS TRUE
+</b:if>
+In the example above, the content will only appear on post pages.
+
+The content can be a div, a section, a style tag or another conditional tag etc.
+
+If you want to specify a alternate content (when the condition is false), you need to insert a <b:else/> tag followed by the content, like this:
+
+<b:if cond='data:blog.pageType == "item"'>
+    # THIS CONTENT WILL BE EXECUTED IF CONDITION IS TRUE
+    # i.e. if current page is post (item) page
+<b:else/>
+    # THIS CONTENT WILL BE EXECUTED IF CONDITION IS FALSE
+    # i.e. if not post page
+</b:if>
+The <b:else/> also works like an OR operator as explained above.
